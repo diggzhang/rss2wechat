@@ -11,6 +11,9 @@ var users = require('./routes/users');
 var wechat = require('wechat-enterprise');
 var API = require('wechat-enterprise').API;
 
+var app = express();
+var api =  new API();
+
 var config = {
     token: 'hackthon',
     encodingAESKey: 'FpqVmn7klmiHYGgF6NrAxOPcHX13kHKumrfVuep1L6y',
@@ -30,10 +33,6 @@ var message = {
 };
 
 
-var app = express();
-
-
-var api =  new API();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -56,6 +55,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 api.send(to, message, function (err, result) {
     console.log(err + result);
 });
@@ -84,10 +84,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-app.use('/corp', wechat(config, function (req, res, next) {
-    res.writeHead(200);
-    res.end('hello node api');
-}));
 
 module.exports = app;
