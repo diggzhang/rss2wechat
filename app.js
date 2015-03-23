@@ -11,6 +11,25 @@ var users = require('./routes/users');
 var wechat = require('wechat-enterprise');
 var API = require('wechat-enterprise').API;
 
+var config = {
+    token: 'hackthon',
+    encodingAESKey: 'FpqVmn7klmiHYGgF6NrAxOPcHX13kHKumrfVuep1L6y',
+    corpId: 'wx3412f502e6a35c42'
+};
+
+var to = {
+    "touser" : "diggzhang"
+};
+
+var message = {
+    "msgtype": "text",
+    "text": {
+        "content": "Holiday Request For Pony(http://xxxxx)"
+    },
+    "safe":"0"
+};
+
+
 var app = express();
 
 
@@ -62,16 +81,12 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var config = {
-    token: 'hackthon',
-    encodingAESKey: 'FpqVmn7klmiHYGgF6NrAxOPcHX13kHKumrfVuep1L6y',
-    corpId: 'wx3412f502e6a35c42'
-    echostr: 'gogogo'
-};
-
 app.use('/corp', wechat(config, function (req, res, next) {
     res.writeHead(200);
     res.end('hello node api');
 }));
+
+api.send(to, message, function (err, result) {
+});
 
 module.exports = app;
