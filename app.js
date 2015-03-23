@@ -8,8 +8,13 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var wechat = require('wechat-enterprise');
+var API = require('wechat-enterprise').API;
+
 var app = express();
 
+
+var api =  new API();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -25,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+app.use(express.query());
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -56,5 +62,15 @@ app.use(function(err, req, res, next) {
   });
 });
 
+var config = {
+    token: 'hackthon',
+    encodingAESKey: 'FpqVmn7klmiHYGgF6NrAxOPcHX13kHKumrfVuep1L6y',
+    corpId: 'wx3412f502e6a35c42'
+};
+
+app.use('/corp', wechat(config, function (req, res, next) {
+    res.writeHead(200);
+    res.end('hello node api');
+}));
 
 module.exports = app;
