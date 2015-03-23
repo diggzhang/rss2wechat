@@ -66,6 +66,7 @@ var config = {
     token: 'hackthon',
     encodingAESKey: 'FpqVmn7klmiHYGgF6NrAxOPcHX13kHKumrfVuep1L6y',
     corpId: 'wx3412f502e6a35c42'
+    echostr: 'gogogo'
 };
 
 app.use('/corp', wechat(config, function (req, res, next) {
