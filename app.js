@@ -12,12 +12,13 @@ var wechat = require('wechat-enterprise');
 var API = require('wechat-enterprise').API;
 
 var app = express();
-var api =  new API();
 
 var config = {
     token: 'hackthon',
+    corpsecret: 'Yc4PJr25b3BYSE6kWNUYgYBW7l-ICBcNs9weUSdZPz6d-UMmRLo6cYFZRVpRXWl1',
     encodingAESKey: 'FpqVmn7klmiHYGgF6NrAxOPcHX13kHKumrfVuep1L6y',
     corpId: 'wx3412f502e6a35c42'
+  
 };
 
 var to = {
@@ -33,6 +34,7 @@ var message = {
 };
 
 
+var api =  new API(config.corpId, config.corpsecret,'0');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
