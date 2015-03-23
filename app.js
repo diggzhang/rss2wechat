@@ -56,6 +56,10 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+api.send(to, message, function (err, result) {
+    console.log(err + result);
+});
+
 
 // error handlers
 
@@ -85,8 +89,5 @@ app.use('/corp', wechat(config, function (req, res, next) {
     res.writeHead(200);
     res.end('hello node api');
 }));
-
-api.send(to, message, function (err, result) {
-});
 
 module.exports = app;
